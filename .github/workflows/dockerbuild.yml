@@ -1,7 +1,7 @@
 name: dockerbuild
 # Build Docker image.
 on:
-  push:
+  #push:
   #schedule:
   #  - cron: 0 20 * * *
   workflow_dispatch:
@@ -13,8 +13,8 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - { name: ubuntu-24.04, os: ubuntu-24.04 }
-          - { name: ubuntu-24.04-arm, os: ubuntu-24.04 }
+          # - { name: ubuntu-24.04, os: ubuntu-24.04 }
+          - { name: ubuntu-24.04-arm, os: ubuntu-24.04-arm }
 
     steps:
     - uses: actions/checkout@v6
