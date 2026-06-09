@@ -1,0 +1,27 @@
+name: dockerbuild
+# Build Docker image.
+on:
+  push:
+  #schedule:
+  #  - cron: 0 20 * * *
+  workflow_dispatch:
+jobs:
+
+  linux:
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { name: ubuntu-24.04, os: ubuntu-24.04 }
+          - { name: ubuntu-24.04-arm, os: ubuntu-24.04 }
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        submodules: recursive
+
+    - name: Build Docker image
+      run: |
+           docker build -f docker/Dockerfile.gpu -t turboocr .
+           docker images
